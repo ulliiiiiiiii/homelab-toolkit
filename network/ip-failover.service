@@ -1,0 +1,7 @@
+[Unit]
+Description=Keep the failover address on the right interface
+After=NetworkManager.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/ip-failover.sh

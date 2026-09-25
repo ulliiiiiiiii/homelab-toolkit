@@ -1,0 +1,16 @@
+# systemd user unit: ~/.config/systemd/user/idle-watch.service
+[Unit]
+Description=Screensaver after ten minutes without input
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+ExecStart=%h/.local/bin/idle-watch.sh -t 600 %h/.local/bin/bounce-screensaver.py %h/.local/share/screensaver/image.png
+Restart=on-failure
+# the watcher and the screensaver it starts share these limits
+CPUQuota=20%
+MemoryMax=300M
+TasksMax=20
+
+[Install]
+WantedBy=graphical-session.target
